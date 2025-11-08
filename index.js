@@ -3,7 +3,9 @@ const app = express();
 const port = 2000;
 
 app.get('/',(req, res)=>{
-    res.send('สวัสดีหน้าแรก')
+    console.log(req.query);
+    const { q, sortBy } = req.query;
+    res.send(`สวัสดีจ้าาา q=${q}, sortBy=${sortBy}`);
 });
 
 app.listen(port, ()=> {
