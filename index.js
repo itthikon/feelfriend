@@ -7,5 +7,5 @@ app.get('/',(req, res)=>{
 });
 
 app.listen(port, ()=> {
-    console.log(`start at port ${port}`)
+    console.log(`start at port ${port} click link : http://localhost:${port}`)
 });
