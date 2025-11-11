@@ -10,13 +10,11 @@ const port = 2000;
 
 const allPosts = [
     {id: 1, title: 'น่ารัก222', from: 'คนน่ารัก', createdAtText: '14 April 2022', commentsCount: 2},
-    {id: 1, title: 'น่ารัก111', from: 'คนน่ารัก', createdAtText: '12 April 2022', commentsCount: 2}
+    {id: 1, title: 'น่ารัก111', from: 'คนน่ารัก', createdAtText: '12 April 2022', commentsCount: 0}
 ];
     
 app.get('/',(req, res)=>{
-    console.log(req.query);
-    const { q, sortBy } = req.query;
-    res.render('home', {q, sortBy});
+    res.render('home', { allPosts });
 });
 
 app.get('/p/new', (req, res) =>{
