@@ -1,5 +1,7 @@
 const express = require('express');
 const hbs = require('hbs');
+const generalRorter = require('./routers/general');
+const postRouter = require('./routers/posts');
 const path = require('path');
 const app = express();
 
@@ -8,33 +10,11 @@ app.set('view engine', 'hbs');
 hbs.registerPartials(path.join(__dirname, 'views/partials'));
 const port = 2000;
 
-const allPosts = [
-    {id: 1, title: 'น่ารัก111', from: 'คนน่ารัก', createdAtText: '14 April 2022', commentsCount: 2},
-    {id: 2, title: 'น่ารัก222', from: 'คนน่ารัก', createdAtText: '12 April 2022', commentsCount: 0}
-];
-    
-app.get('/',(req, res)=>{
-    res.render('home', { allPosts });
-});
-
-app.get('/p/new', (req, res) =>{
-    res.render('postNew');
-});
-
-app.post('/p/new', (req, res) => {
-    console.log(req.body);
-    const { title } = req.body ?? {};
-    res.send(`Submit ฟอร์มแล้วจ้า title=${title}`);
-});
+app.use('/', generalRorter);
+app.use('/p', postRouter);
 
 
-app.get('/p/:postId', (req, res)=>{
-    console.log(req.params);
-    const { postId } = req.params;
-    const onePost = allPosts.find(post => post.id === +postId);
-    const customTitle = !!onePost ? `${ onePost.title } | ` : 'ไม่พบเนื้อหา |';
-    res.render('postId', { onePost, customTitle });
-});
+
 
 app.listen(port, ()=> {
     console.log(`start at port ${port} click link : http://localhost:${port}`)
