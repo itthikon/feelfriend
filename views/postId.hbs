@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-{{> baseHead customTitle='น่ารัก 555 | '}}
+{{> baseHead customTitle=customTitle}}
 <body>
     {{> siteHeader }}
-    <h1>น่ารัก 555</h1>
-    <p>น่ารักที่สุดในโลก</p>
-    <p>หน้าโพสต์เดี่ยว ID={{ postId }} นีคือรหัสไอดีของคุณ</p>
+    <div>
+        {{#if onePost }}
+            <div style="background-color: rgb(235, 131, 131);">
+                <h2>{{ onePost.title }}</h2>
+                <p>
+                    <span>{{ onePost.from }}</span>
+                    <span>{{ onePost.createdAtText }}</span>
+                </p>
+            </div>
+        {{else}} 
+            <p>ไม่พบโพสต์ที่คุณต้องการดู</p>
+        {{/if}}
+    </div>
     {{> siteFooter }}
 </body>
 </html>

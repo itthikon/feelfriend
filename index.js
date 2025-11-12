@@ -9,8 +9,8 @@ hbs.registerPartials(path.join(__dirname, 'views/partials'));
 const port = 2000;
 
 const allPosts = [
-    {id: 1, title: 'น่ารัก222', from: 'คนน่ารัก', createdAtText: '14 April 2022', commentsCount: 2},
-    {id: 1, title: 'น่ารัก111', from: 'คนน่ารัก', createdAtText: '12 April 2022', commentsCount: 0}
+    {id: 1, title: 'น่ารัก111', from: 'คนน่ารัก', createdAtText: '14 April 2022', commentsCount: 2},
+    {id: 2, title: 'น่ารัก222', from: 'คนน่ารัก', createdAtText: '12 April 2022', commentsCount: 0}
 ];
     
 app.get('/',(req, res)=>{
@@ -31,7 +31,9 @@ app.post('/p/new', (req, res) => {
 app.get('/p/:postId', (req, res)=>{
     console.log(req.params);
     const { postId } = req.params;
-    res.render('postId', { postId });
+    const onePost = allPosts.find(post => post.id === +postId);
+    const customTitle = !!onePost ? `${ onePost.title } | ` : 'ไม่พบเนื้อหา |';
+    res.render('postId', { onePost, customTitle });
 });
 
 app.listen(port, ()=> {
